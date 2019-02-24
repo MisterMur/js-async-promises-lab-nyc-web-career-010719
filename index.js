@@ -5,3 +5,68 @@ const questions = [
 ]
 
 let question;
+const container = document.querySelector('.container')
+const questionContainer = document.querySelector('.question-container')
+
+document.addEventListener('DOMContentLoaded',function(){
+
+})
+
+container.addEventListener('click',function(e){
+  // debugger
+  if (e.target.innerText === ' ASK AWAY!')
+  {
+
+    console.log('in if')
+    askQuestionThen()
+  }
+})
+
+function appendQuestion (q)
+{
+  questionContainer.innerText = q['questionText']
+}
+
+function askQuestionThen(time){
+  question = questions[0]
+  appendQuestion(question)
+  return new Promise(function(resolve){
+    setTimeout(function(){
+      resolve(question)
+    }, time)
+  })
+}
+
+
+function trueAndFalseButtons(){
+  return btns = document.querySelector('.true-false-list').querySelectorAll('.btn')
+}
+
+function toggleTrueAndFalseButtons(){
+  trueAndFalseButtons().forEach(function(btn){
+    btn.classList.toggle("hide")
+  })
+}
+function displayQuestionOnClick(){
+  let btn = document.querySelector('a')
+  return btn.addEventListener('click', () => {
+    toggleTrueAndFalseButtons()
+    askQuestionThenRemoveQuestion(5000)
+  })
+}
+
+function removeQuestion(){
+  return new Promise(function(){
+    let container = document.querySelector('.question-container')
+    container.innerHTML = ''
+    toggleTrueAndFalseButtons()
+  })
+}
+
+function askQuestionThenRemoveQuestion(time){
+  return askQuestionThen(time).then(removeQuestion)
+}
+function checkQuestion(question,answer){
+  return question.questionAnswer == answer
+
+}
